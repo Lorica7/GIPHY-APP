@@ -1,0 +1,26 @@
+
+
+.animal-btn {
+    margin: 10 10 10 10;
+    align-self: center
+}
+
+h1 {
+    text-align: center;
+}
+
+header {
+    background-color: darksalmon;
+}
+
+#wrapper {
+    float: right;
+    background-color: blueviolet;
+    margin-top: 20px;
+}
+
+.container {
+    clear: none;
+    background-color: aquamarine;
+}
+

@@ -1,11 +1,16 @@
 
    
     var button = document.getElementById("search");
+
+    var animalArray = ["zebra", "dogs", "pigs", "sloth", "guinea-pig", "platypus", "kangaroo", "elephant", "chipmunk"];
  
-     var animalContainter = document.getElementById("animal-info");
+     var animalContainer = document.getElementById("animal-info");
     var searchReq=  $(this).val("searchReq");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchReq + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=5"
  
+  
+   
+   
     button.addEventListener("click", function () {
         $.ajax({
             url: queryURL,
@@ -15,6 +20,17 @@
     });
 });
 
+
+    function renderButtons (){
+        for (i = 0; i< animalArray.length; i ++){
+            var btn = $("<button>");
+            btn.addClass("animal-btn");
+            btn.attr("data-animal", animalArray[i]);
+            btn.text(animalArray[i]);
+            $("#button-holder").append(btn);
+    };
+    };
+   renderButtons();
 /*
      ourRequest.onload = function() {
          if (ourRequest.status >= 200 && ourRequest.status < 400){
