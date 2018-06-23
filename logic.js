@@ -38,49 +38,7 @@
     };
    renderButtons();
 /*
-     ourRequest.onload = function() {
-         if (ourRequest.status >= 200 && ourRequest.status < 400){
-             console.log(ourRequest.responseText);
-             var ourData = JSON.parse(ourRequest.responseText);
-             renderHTML(ourData);
-         } else {
-             alert("We connected to the server, but it returned an error")
-         }   
-     };
- 
-     ourRequest.onerror = function () {
-         alert("Connection error")
-     };
- 
-     ourRequest.send();
-     pageCounter ++;
-     if (pageCounter > 3) {
-         btn.classList.add("hide-me");
- 
-     }
-    });
- 
-     function renderHTML (ourData) {
-         var htmlString = ""; 
-         for (i = 0; i< ourData.length; i ++){
-             htmlString += "<p>" + ourData[i].name + "is a " + ourData[i].species + " that likes to eat ";
-             for (ii = 0; ii < ourData[i].foods.likes.length; ii++){
-                 if (ii == 0){
-                     htmlString+= ourData[i].foods.likes[ii];
-                 }else {
-                     htmlString+= " and " + ourData[i].foods.likes[ii];
-                 }
-             }
-                htmlString += " and dislikes "
-                 for (ii = 0; ii < ourData[i].foods.dislikes.length; ii++){
-                     if (ii == 0){
-                         htmlString+= ourData[i].foods.dislikes[ii];
-                     }else {
-                         htmlString+= " and " + ourData[i].foods.dislikes[ii];
-                     }
-                 }
-                 htmlString += ".</p>";
-             }
+   
             
          animalContainter.insertAdjacentHTML('beforeend', htmlString);
      };
