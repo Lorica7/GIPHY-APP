@@ -3,7 +3,7 @@
 var giphySearchButton = document.getElementById("search");
 var animalImages = document.getElementsByTagName("img");
 var animalArray = ["zebra", "dogs", "pigs", "sloth", "guinea-pig", "platypus", "kangaroo", "elephant", "chipmunk"];
-
+var topButtons = document.getElementsByClassName("animal-btn");
 var animalContainer = document.getElementById("animal-images");
 var state = {
     images: {
@@ -14,7 +14,7 @@ var state = {
 giphySearchButton.addEventListener("click", function () {
     $("#animal-images").empty();
     let searchReq = document.getElementById("user-input").value;
-    let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchReq + "";
+    let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchReq + "&api_key=";
 //making AJAX call
     $.ajax({
         url: queryURL,
@@ -49,8 +49,7 @@ giphySearchButton.addEventListener("click", function () {
     btn.text(searchReq);
     $("#button-holder").append(btn);
 
-    animalImages.addEventListener("click", function () {
-        $("#animal-images").empty();
+   
 });
 // so you will need the 3 data-attributes, one for the still image, one for the animated and one to keep track of whether it is animated or still (a state indicator)
 // the gif will start wih the animated one and
@@ -72,3 +71,33 @@ function renderButtons() {
     };
 };
 renderButtons();
+
+
+
+$(".animal-btn").click(function() {
+    $("#animal-images").empty();
+    let buttonReq = event.target.textContent;
+
+    console.log(buttonReq);
+    let searchURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonReq + "&api_key=";
+//making AJAX call
+    $.ajax({
+        url: searchURL,
+        method: "GET"
+    }).then(function (result) {  if (result.data.length !== 0) {
+        state.images[buttonReq] = []; 
+    }
+    for (let i = 0; i < result.data.length; i++) {
+        var movingImage = result.data[i].images.fixed_height.url;
+        var stillImage = result.data[i].images.fixed_height_still.url;
+        var imageObj = {movingImage: movingImage, stillImage: stillImage};
+        state.images[buttonReq].push(imageObj)
+        var img = `<img class="giphyImages" data-searchterm="${buttonReq}" id="${i}" src="${stillImage}"></img>`;
+        //var img = $("<img>")
+       // img.attr("src", src);
+       // append the images to the appointed div
+        $("#animal-images").append(img)
+        console.log("im here")
+    };
+});
+ });  
