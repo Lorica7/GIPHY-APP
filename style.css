@@ -1,26 +1,65 @@
+body {
+    font-family: 'Chewy', cursive;
+    background-image: url(leopardprint.jpg);
+    
+}
 
-
-.animal-btn {
-    margin: 10 10 10 10px;
-    align-self: center
+.btn-large {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    align-self: center;
+    height: 40px;
+    width: 110px;
+    border-radius: 8px;
 }
 
 h1 {
     text-align: center;
+    font-size: 300%;
+    color: #c09562;
+    margin-top: 20px;
+    
+}
+
+#amazing {
+    font-family: 'Fontdiner Swanky', cursive;
+    opacity: 0.9;
 }
 
 header {
-    background-color: darksalmon;
+    background-color: black;
+    margin: 20px;
+    height: 270px;
+    overflow: auto;
+   
 }
 
 #wrapper {
     float: right;
-    background-color: blueviolet;
+    background-color: black;
+    color: #c09562;
     margin-top: 20px;
+    padding: 20px;
+}
+
+h3 {
+    margin: 10px;
+}
+
+#search {
+    margin: 20px;
 }
 
 .container {
     clear: none;
-    background-color: aquamarine;
 }
 
+img {
+    margin: 20px;
+}
+
+#animal-images {
+    background-color: black;
+    
+}
