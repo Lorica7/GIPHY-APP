@@ -3,9 +3,9 @@
 var giphySearchButton = document.getElementById("search");
 var animalImages = document.getElementsByTagName("img");
 var animalArray = ["zebra", "dogs", "pigs", "sloth", "guinea-pig", "platypus", "kangaroo", "elephant", "chipmunk"];
-var topButtons = document.getElementsByClassName("btn-large");
+// MIght not need this variable var topButtons = document.getElementsByClassName("btn-large");
 var animalContainer = document.getElementById("animal-images");
-var imagesArr = []
+
 let imagesArr2 = []
 
 var resultData = {}
@@ -13,7 +13,9 @@ var resultData = {}
 giphySearchButton.addEventListener("click", function () {
     $("#animal-images").empty();
     let searchReq = document.getElementById("user-input").value;
+    console.log('search?', searchReq);
     let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchReq + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=10";
+    var imagesArr = [];
     //making AJAX call
     $.ajax({
         url: queryURL,
@@ -21,8 +23,7 @@ giphySearchButton.addEventListener("click", function () {
     }).then(function (result) {
 
         console.log("success got data", result);
-        //if (result.data.length !== 0) {
-        // state.images[searchReq] = [];
+       
 
         // }
         //looping through the array of results and accessing the different urls for still and moving gifs
@@ -40,16 +41,13 @@ giphySearchButton.addEventListener("click", function () {
             console.log(imagesArr);
         };
     });
-    //    $("#animal-images").click(function () {
-    //        for (let i = 0; i < resultData.data.length; i++) {
-    //            console.log('changing url?', state.images[i].image.Obj.movingImage)
-    //            $(this).attr("src", state.images[i].image.Obj.movingImage);
-    //        };
-    //    });
+    
 
-    //MAYBE DON'T NEED FOR LOOP.....NEED TO SET INDEX OF ARRAY ITEM EQUAL TO THE IMAGE ID
+    
     $('body').on('click', '.giphyImages', function () {
         let i = parseInt($(this).attr('id'));
+        console.log(i);
+        console.log(imagesArr)
         console.log('clicking these animals')
         console.log('changing url?', imagesArr[i].movingImage)
         $(this).attr("src", imagesArr[i].movingImage);
@@ -57,8 +55,11 @@ giphySearchButton.addEventListener("click", function () {
     });
 
 
+
     //push the search term to the array
     console.log(searchReq);
+
+    if (animalArray.indexOf(searchReq) === (-1)) {
     animalArray.push(searchReq);
     //$("#buttons-holder").empty();
     //create a new button from the search entry, and put button in the div at top
@@ -67,8 +68,10 @@ giphySearchButton.addEventListener("click", function () {
     btn.attr("data-animal", searchReq);
     btn.text(searchReq);
     $("#button-holder").append(btn);
+} else {
+    console.log("This button already exists.")
+};
 });
-
 // put event click for images below --->
 
 
@@ -80,7 +83,7 @@ giphySearchButton.addEventListener("click", function () {
 // the gif will start wih the animated one and
 // just like the button an on click event that when the functions runs it will change 
 // use what is in the data attribute to swap between animated and still
-// make sure to use google if u get stuck
+
 
 //need to specify state
 
@@ -100,7 +103,7 @@ renderButtons();
 $(".btn-large").click(function (event) {
     $("#animal-images").empty();
     let buttonReq = event.target.textContent;
-
+imagesArr2 = [];
     console.log(buttonReq);
     let searchURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonReq + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=5";
     //making AJAX call
@@ -116,9 +119,19 @@ $(".btn-large").click(function (event) {
             var stillImage = result.data[i].images.fixed_height_still.url;
             var imageObj = { movingImage: movingImage, stillImage: stillImage };
             imagesArr2.push(imageObj)
-            var img = `<img class="giphyImages" data-searchterm="${buttonReq}" id="${i}" src="${stillImage}"></img>`;
+            var img = `<img class="giphyImagesSet2" data-searchterm="${buttonReq}" id="${i}" src="${stillImage}"></img>`;
             $("#animal-images").append(img);
         };
+
+        $('body').on('click', '.giphyImagesSet2', function () {
+            let ii = parseInt($(this).attr('id'));
+            console.log(ii);
+            console.log(imagesArr2);
+            console.log('clicking these animals')
+            console.log('changing url?', imagesArr2[ii].movingImage)
+            $(this).attr("src", imagesArr2[ii].movingImage);
+    
+        });
     });
 });
 
